@@ -17,6 +17,9 @@ Dakota Carter <dakota22789@gmail.com>
 Test using:
 http://the-internet.herokuapp.com/
 http://automationpractice.com/index.php
+
+Mac OSX error when forking. To avoid, run:
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 """
 
 from src.base.base import Base
