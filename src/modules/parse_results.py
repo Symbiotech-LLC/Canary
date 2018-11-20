@@ -27,14 +27,6 @@ class Parse_Excel:
 	def main(self):
 		if not os.path.isdir(self.log_dir):
 			os.makedirs(self.log_dir)
-	
-	def create_workbook(self, filename):
-		report_path = self.log_dir + filename + "-" + self.date + "-" + self.exec_time + ".xlsx"
-		workbook = xlsxwriter.Workbook(report_path, {'strings_to_urls': False})
-		header_cells = workbook.add_format()
-		header_cells.set_bold()
-		header_cells.set_align('center')
-		return workbook, report_path
 
 	def scraper_to_excel(self, json_results: dict, filename=''):
 		headers = dict()
@@ -94,24 +86,6 @@ class Parse_Excel:
 				for index, data in type_data.items():
 					total_records[element_type].append(data)
 		
-		# print(total_records)
-		# output_file = open(report_path, 'w')
-		# csv_writer = csv.writer(output_file, delimiter='\t', quotechar='"')
-		# for element_type, type_data in total_records.items():
-		# 	output_file.write("\n" + str(element_type) + "\n")
-		# 	csv_writer.writerow(headers[element_type])
-		# 	output_file.write("\n")
-		# 	for item in type_data:
-		# 		order = ["\t"] * len(headers[element_type])
-		# 		for key, value in item.items():
-		# 			index = headers[element_type].index(key)
-		# 			order[index] = value
-		# 		csv_writer.writerow(order)
-		# 	output_file.write("\n\n")
-		
-		# output_file = open(report_path, 'w')
-		# csv_writer = csv.writer(output_file, delimiter='\t', quotechar='"')
-		
 		workbook = xlsxwriter.Workbook(report_path, {'strings_to_urls': False})
 		header_cells = workbook.add_format()
 		header_cells.set_bold()
@@ -131,10 +105,12 @@ class Parse_Excel:
 					column = index
 					worksheet.write(row, column, str(value))
 				row += 1
+		workbook.close()
 		return report_path
 	
 	def status_to_excel(self, json_results: dict, filename=''):
 		print("Writing json to excel")
+		report_path = self.log_dir + filename + "-" + self.date + "-" + self.exec_time + ".xlsx"
 		# Append List of dictionary results to a single dictionary
 		json_dictionary = {}
 		for d in json_results:
@@ -160,9 +136,13 @@ class Parse_Excel:
 			columns.insert(2, columns.pop(columns.index('pageTitle')))
 		# print(columns)
 		# print(df)
-		
-		workbook, report_path = self.create_workbook('UrlStatus')  # Create workbook
+		workbook = xlsxwriter.Workbook(str(report_path), {'strings_to_urls': False})
+		header_cells = workbook.add_format()
+		header_cells.set_bold()
+		header_cells.set_align('center')
 		workbook.add_worksheet('Status')  # Add Named Sheet to Workbook
-		writer = pandas.ExcelWriter(report_path, engine='xlsxwriter', options={'strings_to_urls': False})  # Write DataFrame to excel
+		workbook.close()
+		writer = pandas.ExcelWriter(str(report_path), engine='xlsxwriter', options={'strings_to_urls': False})  # Write DataFrame to excel
 		df[columns].to_excel(writer, sheet_name='Status')  # Write sorted Dataframe
+		writer.close()
 		return report_path
