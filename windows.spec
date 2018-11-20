@@ -4,11 +4,11 @@ block_cipher = None
 
 
 a = Analysis(['canary.py'],
-             pathex=['D:\\GitHub\\site-tools\\canary'],
+             pathex=['.\'],
              binaries=[],
              datas=[],
              hiddenimports=[],
-             hookspath=['D:\\GitHub\\site-tools\\canary\\src\\resrouces\\hooks'],
+             hookspath=['.\\src\\resrouces\\hooks'],
              runtime_hooks=[],
              excludes=[],
              win_no_prefer_redirects=False,

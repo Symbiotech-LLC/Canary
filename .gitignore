@@ -1,2 +1,11 @@
-
 Results/
+../.DS_Store
+../__pycache__/
+../build/
+../src/.DS_Store
+../src/resources/hooks/__pycache__/
+.DS_Store
+__pycache__/
+build/
+src/.DS_Store
+src/resources/hooks/__pycache__/
