@@ -1,5 +1,5 @@
 # Canary Summary
-canary is a command line tool to scrape html elements. It can also validate of links & images scraped from these pages and build an easy to read report. Canary is developed with the community in mind.
+canary is a command line tool to scrape html elements. It can also validate of links & images scraped from these pages and build an easy to read report. Canary is developed with the Open Source community in mind.
 
 # Disclaimer:
 Be careful about the number of urls being verified / scraped. <br />
@@ -8,9 +8,12 @@ a lot of network traffic / requests to the website and potentially block your IP
 To the target, this may look like an attack / Denial of Service (DoS).
 
 # Community Driven Software
-Canary is created to be an open source tool to help with web application testing. Donating to our Patreon Page will help us continue to provide new features and support.
+Donating to our Patreon Page will help us continue to provide new features and support.
 https://www.patreon.com/symbiotech_LLC
 
+# Developed with the Open Source Community in Mind
+Donating to our Patreon Page will help us continue to provide new features and support.
+https://www.patreon.com/symbiotech_LLC
 
 # Canary Commands:
 ### List all available options (help)
