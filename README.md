@@ -7,10 +7,6 @@ If you are doing this regularly against a website or domain without the owner's 
 a lot of network traffic / requests to the website and potentially block your IP address.
 To the target, this may look like an attack / Denial of Service (DoS).
 
-# Community Driven Software
-Donating to our Patreon Page will help us continue to provide new features and support.
-https://www.patreon.com/symbiotech_LLC
-
 # Developed with the Open Source Community in Mind
 Donating to our Patreon Page will help us continue to provide new features and support.
 https://www.patreon.com/symbiotech_LLC
