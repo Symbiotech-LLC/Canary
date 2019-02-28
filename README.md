@@ -12,7 +12,7 @@ Canary is created to be an open source tool to help with web application testing
 https://www.patreon.com/symbiotech_LLC
 
 
-# canary Commands:
+# Canary Commands:
 ### List all available options (help)
 python canary.py -h
 
