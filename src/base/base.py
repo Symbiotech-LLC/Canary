@@ -141,7 +141,11 @@ class Base:
 		return re.findall('(?i)(https?:)', url)[0]
 
 	def get_site_root(self, url):
-		return re.findall('(?i)(.+?://\w+.\w+.\w+)', url)[0]
+		# from urlparse import urlparse  # Python 2
+		parsed_uri = urllib.parse.urlparse("https://wwwdev.branduslb.ford.com/cars/fiesta/")
+		result = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+		return result
+		# return re.findall('(?i)(.+?://\w+.\w+.\w+)', url)[0]
 
 	def query_sitemap_db(self, db, query):  # Query Components DB for list of components and identifiers
 		queried_urls = []
