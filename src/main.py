@@ -98,7 +98,7 @@ class Canary:
 				subprocess.call([opener, report])
 			else:
 				os.startfile(report)
-		except:
+		except Exception as e:
 			try:
 				os.startfile(report)
 			except:
