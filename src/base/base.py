@@ -141,8 +141,7 @@ class Base:
 		return re.findall('(?i)(https?:)', url)[0]
 
 	def get_site_root(self, url):
-		# from urlparse import urlparse  # Python 2
-		parsed_uri = urllib.parse.urlparse("https://wwwdev.branduslb.ford.com/cars/fiesta/")
+		parsed_uri = urllib.parse.urlparse(str(url))
 		result = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
 		return result
 		# return re.findall('(?i)(.+?://\w+.\w+.\w+)', url)[0]
