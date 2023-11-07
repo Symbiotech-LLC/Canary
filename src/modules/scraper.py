@@ -69,7 +69,6 @@ class Scrape:
 		print("Scraping data from: " + str(url))
 		response, page_source, self.session = self.base.session_get_response(self.session, url, True)
 		soup = BeautifulSoup(page_source, 'html.parser')
-		# print("URL: " + str(url))
 		
 		for index, type in enumerate(ScrapeRequirements):
 			element_type = str(type).split(".", 1)[1].lower()
@@ -83,15 +82,12 @@ class Scrape:
 					for t in temp:
 						elements.append({'tag': str(tag), 'value': t})
 			
-			# print(str(element_tags) + " tags found: " + str(len(elements)))
-			# print(elements)
 			for x, y in enumerate(elements):
 				tag = elements[x]['tag']
 				element = elements[x]['value']
 				element_log = dict()
 				for attribute in attributes:
 					try:
-						# print("scraping " + str(attribute))
 						temp = element[attribute]
 						if isinstance(temp, list):
 							temp = temp[0]
@@ -144,7 +140,6 @@ class Scrape:
 					if 'target_url' in result['data']:
 						target_domain = self.base.get_site_root(result['data']['target_url'])
 						protocol = self.base.get_protocol(target_domain)
-						# target_domain = target_domain.replace(protocol, '')
 						if target_domain in self.arguments.limit:
 							results.append(result)
 					else:
@@ -153,10 +148,8 @@ class Scrape:
 					if 'target_url' in result['data']:
 						target_domain = self.base.get_site_root(result['data']['target_url'])
 						protocol = self.base.get_protocol(target_domain)
-						# target_domain = target_domain.replace(protocol, '')
 						if not target_domain in self.arguments.exclude:
 							results.append(result)
-							# print("Excluding link: " + str(result['data']['target_url']))
 					else:
 						results.append(result)
 				else:
@@ -164,7 +157,6 @@ class Scrape:
 		return results
 	
 	def _sort_dict(self):
-		# logger = self.base
 		print("Sorting Scraped Results")
 		verifiable = ['images', 'links']
 		for url_key in self.scrape_results.keys():  # Sort Through URLs dictionary and organize it
@@ -177,7 +169,7 @@ class Scrape:
 					self.sorted_results[url_key][et_key] = et_value
 				else:
 					for index, value in self.scrape_results[url_key][et_key].items():  # If Element Type is an image or link
-						# print("\nKey: " + str(index) + ":\nValue: " + str(value))
+						
 						# If not a verifiable link, add to dictionary under ignored_<key>
 						# if ('target_url' not in value) or ('href' in value.keys() and (value['href'].startswith(('java', '#', 'data')))) or \
 						# 		('src' in value.keys() and value['src'].startswith(('data:'))):
@@ -201,4 +193,4 @@ class Scrape:
 							if x not in self.sorted_results[url_key][str(et_key)]:
 								value['original_scraped_index'] = int(index)
 								self.sorted_results[url_key][str(et_key)][x] = value
-		# logger.write_log(self.sorted_results, 'verifiedInfo')
+		
