@@ -11,7 +11,11 @@ import platform, os, sys, re, time, json, csv
 from src.base.base import Base
 import xlsxwriter
 import pandas
-from pandas.io.json import json_normalize
+try:
+	from pandas.io.json import json_normalize
+except Exception as e:
+	# print(f"Error importing module: {e}")
+	pass
 
 
 class Parse_Excel:
@@ -50,7 +54,6 @@ class Parse_Excel:
 					for key, value in data.items():
 						if key not in headers[element_type]:
 							headers[element_type].append(key)
-		# print(headers)
 		
 		# sort headers
 		for element_type in headers.keys():
@@ -117,15 +120,10 @@ class Parse_Excel:
 			for url, data in d.items():
 				json_dictionary[url] = data
 		
-		# data_frame = pandas.DataFrame(json_normalize(json_dictionary))
-		# print(data_frame)
-		# print(data_frame.columns.values)
 		loop_data = list()
 		for url, data in json_dictionary.items():
-			# print(url)
-			# print(data)
 			loop_data.append(data)
-			# data_frame = pandas.DataFrame(json_normalize(json_results))
+			
 		df = pandas.DataFrame(loop_data)
 		columns = list(df.columns.values)
 		if 'url' in columns:
@@ -134,8 +132,7 @@ class Parse_Excel:
 			columns.insert(1, columns.pop(columns.index('status')))
 		if 'pageTitle' in columns:
 			columns.insert(2, columns.pop(columns.index('pageTitle')))
-		# print(columns)
-		# print(df)
+	
 		workbook = xlsxwriter.Workbook(str(report_path), {'strings_to_urls': False})
 		header_cells = workbook.add_format()
 		header_cells.set_bold()

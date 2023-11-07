@@ -53,7 +53,6 @@ class Verify:
 			results = pool.map(self._verify, self.unique_requests)
 		# queue = dict(pair for d in results for pair in d.items())  # convert the returned list to dictionary
 		for result in results:
-			# print(result)
 			target_url = result[0]
 			response_data = result[1]
 			for url_key in self.log.keys():  # Loop Through URL Keys
@@ -62,7 +61,6 @@ class Verify:
 						for index, value in self.log[url_key][element_type].items():  # Append data to list
 							dict_target_url = value['target_url']
 							if target_url == dict_target_url:
-								# print([element_url, element_type, element_index, element_data['target_url'], element_data['status']])
 								self.log[url_key][element_type][index]['status'] = response_data['status']
 								try:
 									self.log[url_key][element_type][index]['redirectedURL'] = response_data['redirectedURL']
